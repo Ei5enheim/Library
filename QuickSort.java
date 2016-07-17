@@ -14,6 +14,27 @@ public class QuickSort {
         in[b] = t;
     }
 
+    public int dutchNatPart (int[] in, int p, int r)
+    {
+        int less = p;
+        int great = r - 1;
+        int q = p;
+        int pivot = in[r];
+
+        while (q <= great) {
+            if (in[q] < pivot) {
+                swap(in, q++, less++);
+            } else if (in[q] > pivot) {
+                swap(in, q, great--);
+            } else {
+                q++;
+            }
+        }
+        swap(in, ++great, r);
+        this.less = less;
+        return (great);
+    }
+
     /* less marks start of the middle segment
      * great marks the end of the middle seg
      * all the boundaries are inclusive
@@ -166,10 +187,11 @@ public class QuickSort {
         //int q = LomutoPart(in, p, r);
         //int q = HoaresPart(in, p, r);
         //int q = threewayPart(in, p, r);
-        int q = dualPivot(in, p, r);
+        //int q = dualPivot(in, p, r);
+        int q = dutchNatPart(in, p, r);
         less = this.less;
         quickSort(in, p, less - 1);
-        quickSort(in, this.l, this.gt);
+        //quickSort(in, this.l, this.gt);
         quickSort(in, q + 1, r);
     }
 
@@ -177,8 +199,8 @@ public class QuickSort {
     {
         //int[] in = {9,8,9,1,4,5,9,6,9};
         //int[] in = {9,8,7,6,5,4,3,2,1};
-        //int[] in = {4,8,1,6,3,10,11,12,7};
-        int[] in = {1, 2};
+        int[] in = {4,8,1,6,3,10,11,12,7};
+        //int[] in = {1, 2};
         //int[] in = {2,1,3};
         //int[] in = {9, 9, 9, 9, 9};
 
